@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Placeholder Images</title>
+</head>
+<body>
+  <canvas id="projectCanvas" width="800" height="450"></canvas>
+  <canvas id="blogCanvas" width="800" height="450"></canvas>
+  
+  <script>
+    function createPlaceholder(canvasId, text, filename) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      // Fill background
+      ctx.fillStyle = '#2a3546';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Add text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '30px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, canvas.width/2, canvas.height/2);
+      
+      // Create download link
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/jpeg');
+      link.textContent = `Download ${filename}`;
+      document.body.appendChild(link);
+      document.body.appendChild(document.createElement('br'));
+    }
+    
+    createPlaceholder('projectCanvas', 'Project Image Placeholder', 'default-project.jpg');
+    createPlaceholder('blogCanvas', 'Blog Image Placeholder', 'default-blog.jpg');
+  </script>
+</body>
+</html> 
